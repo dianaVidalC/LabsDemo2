@@ -1,0 +1,18 @@
+#selected-seats{
+    list-style: none;
+}
+
+.error{
+    color: #ff0000;
+}
+.hide{
+    display: none;
+}
+.open{
+    display: block;
+}
+.status{
+    width: 300px;
+    border:2px solid gray;
+    padding:1rem;
+}
