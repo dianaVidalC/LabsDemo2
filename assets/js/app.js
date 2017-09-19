@@ -46,22 +46,24 @@ $(_=> {
                 ]
             },
             click: function () {
-              //console.log(this.settings);
-              //console.log(this.settings.data.classes);
+             //----Este es el código que aumenté----
               $("#myModal").css("display","block");
-              $("#enviar").on("click",function(){
-                  vendido.forEach(function(elemento){
-                    console.log("ente al for");
-                      console.log(vendido);
+              $("#guardar").on("click",()=>{
+                  $("#myModal").css("display","none");
+                  vendido.reduce((elemento)=>{
                     if(elemento==nombre.value){
-                      console.log("encontrado");
-                      //vendido.push(name);
-                      //localStorage.setItem("usuarios", vendido);
+                      vendido.push(nombre.value);
+                      localStorage.setItem("usuarios", vendido);
+                    }else{
+                        alert("El nombre ya existe");
                     }
+                    console.log(this);
+                    console.log(vendido);
                   });
                 });
                 $(this).attr("nombre", nombre.value);
                 console.log($(this).attr("nombre"));
+                //-------------------------------------
                 if (this.status() == 'available') {
                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>$' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
                             .attr('id', 'cart-item-' + this.settings.id)
@@ -82,10 +84,11 @@ $(_=> {
                 }
               }
         });
-
-    $(".close").on("click",function() {
+//Este código es para cerra el modal con la "X"---
+    $(".close").on("click",()=> {
             $("#myModal").css("display","none");
         });
+    //--------------------------------------
     $('#selected-seats').on('click', '.cancel-cart-item', function () {
         sc.get($(this).parents('li:first').data('seatId')).click();
     });
@@ -100,8 +103,8 @@ function recalculateTotal(sc) {
     return total;
 }
 
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+window.onclick = (event)=> {
+    if (event.target == $("#myModal")) {
+        $("#myModal").css("display","none");
+     }
+}
